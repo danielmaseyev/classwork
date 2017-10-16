@@ -19,9 +19,13 @@ public class ArraysMain {
 			values[i]=""+(i+1);
 		}
 		values[0]="Ace";
-		System.out.println(Arrays.toString(intRay));
+		values[12]="King";
+		values[11]="Queen";
+		values[10]="Jack";
+		printDeck();
+		//System.out.println(Arrays.toString(intRay));
 	}
-
+	private String[] printDeck()
 	private void shuffle(int[] arr) {
 		for(int i = 0; i < arr.length; i++) {
 			swap(arr,i,(int)(Math.random()*arr.length));
