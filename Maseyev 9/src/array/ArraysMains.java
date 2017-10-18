@@ -6,13 +6,43 @@ public class ArraysMains {
 
 	private String[] suits;
 	private String[] values;
-	private int[] intRay;
-	
 	public ArraysMains() {
-		tuesdayMethods();
+		wednesdayMethods();
 		
 	
 	}	
+	private void wednesdayMethods() 
+	{
+		int[] diceRolls= new int[1000];
+		populate(diceRolls);
+		int[] data = longestConsecutiveSeqAndIndex(diceRolls);
+		int longest = data[0];
+		System.out.println("the longest sequence is "+ longest + "rolls." + "it happened on roll #"+data[1] + "the sequence was: "
+				+Arrays.toString(subArray(diceRolls,data[1], data[0]))+".");
+	}	
+	private int  longestConsecutiveSeqAndIndex(int[] arr)
+	{
+		int[] data = new int[2];
+		data[0]=1;
+		int currentCount = 1;
+		for(int i = 0; i < arr.length; i++)
+		{
+			while(i + currentCount< arr.length && isConsec(arr,i,i+currentCount))
+					{
+					currentCount++;
+					}
+			
+				if(currentCount > data[0])
+				{
+					data[0] = currentCount;
+					data[1] = i;
+				}
+				i=i+currentCount-1;
+				currentCount=1;
+			
+		}
+		return data;
+	}
 	private void tuesdayMethods() {
 		int[] orderTest = {1,2,3,4,5,6,7,8,9,10};
 		cycleThrough(orderTest, 5);
