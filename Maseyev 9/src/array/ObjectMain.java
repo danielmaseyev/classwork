@@ -4,14 +4,38 @@ public class ObjectMain {
 
 	public ObjectMain() 
 	{
-		Object[] people = new Object[12];
+		Person[] people = new Person[10];
 		populate(people);
-		people[0] = new Thing("toaster oven");
-		for(Object p: people)
+		//people[0] = new Thing("toaster oven");
+		//Person[] group = selectGroup(people,120);
+		//analyzeCommonalities(people, group);
+		for(Person p : people)
 		{
+			p.mingle(people);
 			System.out.println(p);
+			p.statYourFriends();
 		}
+
+	
 	}
+	
+
+	private void analyzeCommonalities(Person[] people, Person[] group)
+	{
+		double averageCommonality = 0;
+		double trials = 500;
+		
+		double sumCounts = 0;
+		for(int i =0;i < trials; i++)
+		{
+			group = selectGroup(people,people.length);
+			sumCounts += countCommonalities(people,group);
+		}
+		averageCommonality = sumCounts/500;
+		System.out.println("After "+trials+" trials, shuffling "+people.length+" people, on average, "+averageCommonality+" people end up in the same position where they started.");
+
+	}
+
 
 	private void populate(Object[] people) {
 		for(int i =0;i < people.length; i++)
@@ -50,7 +74,48 @@ public class ObjectMain {
 
 	public static void main(String[] args) {
 		ObjectMain obj = new ObjectMain();
-
+		
 	}
-
+	private int countCommonalities(Object[] arr1, Object[] arr2)
+	{
+		int count = 0;
+		for(int i = 0; i <arr1.length;i++)
+		{
+			if(arr1[i] == arr2[i])
+			{
+				count++;
+			}
+		}
+		return count;
+	}
+	public Person[]selectGroup(Person[]population, int length)
+	{
+		Person[] group = new Person[length];
+		for(int i = 0; i <length;i++)
+		{
+			Person toAdd = randomPerson(population);
+			while(alreadyContains(group, toAdd))
+			{
+				toAdd = randomPerson(population);
+			}
+			group[i] = toAdd;
+		}
+		return group;
+	}
+	private Person randomPerson(Person[]population)
+	{
+		int random = (int)(Math.random()*population.length);
+		return population[random];
+	}
+	private boolean alreadyContains(Person[] population, Person p)
+	{
+		for(int i = 0; i < population.length;i ++)
+		{
+			if(population[i]==p)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }
