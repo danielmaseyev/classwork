@@ -85,6 +85,10 @@ public class CaveRoom {
 	
 		
 	}
+	public static void setUpCaves()
+	{
+		
+	}
 
 	public void goToROom(int direction)
 	{
