@@ -2,7 +2,7 @@ package caveExplorer;
 
 import java.util.Scanner;
 
-public class caveExplorer {
+public class CaveExplorer {
 	public static CaveRoom[][] caves;
 	public static Scanner in;
 	public static Caveroom currentRoom;
