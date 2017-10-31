@@ -103,20 +103,40 @@ public class CaveRoom {
 	
 	public void interpretInput(String input) {
 		while(!isValid(input)) {
-			System.out.println("You can only enter 'w', 'a', 's' or 'd'.");
+			printValidMoves();
 			input = CaveExplorer.in.nextLine();
 		}
 		//task: convert user input into a direction
 		//DO NOT USE AN IF STATEMENT
 		//(or, if you must, don't use more than 1)
-		String dirs = "wdsa";
-		goToRoom(dirs.indexOf(input));
+		int direction = validMoves().indexOf(input);
+		if(direction <4)
+		{
+			goToRoom(direction);
+		}else {
+			performAction(direction);
+		}
+	}
+
+
+	public void performAction(int direction) {
+		CaveExplorer.print("That key does nothing.");
+		
+	}
+
+
+	public void printValidMoves() {
+		System.out.println("You can only enter 'w', 'a', 's' or 'd'.");
+		
+	}
+	public String validMoves()
+	{
+		return "wdsa";
 	}
 
 
 	private boolean isValid(String input) {
-		String validEntries = "wdsa";
-		return validEntries.indexOf(input) > -1 && input.length() ==1;
+		return validMoves().indexOf(input) > -1 && input.length() ==1;
 	}
 
 
