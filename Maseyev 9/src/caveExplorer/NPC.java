@@ -21,26 +21,71 @@ public class NPC {
 
 	public boolean isActive() {
 		// TODO Auto-generated method stub
-		return false;
+		return active;
 	}
 
 	public void interact() {
-		// TODO Auto-generated method stub
+		CaveExplorer.print("Lets interact! type 'bye' to stop");
+		String s = CaveExplorer.in.nextLine();
+		while(!s.equalsIgnoreCase("bye"))
+		{
+			CaveExplorer.print("Yeah... I dont do a whole lot.");
+			s = CaveExplorer.in.nextLine();
+		}
+		CaveExplorer.print("Later, friend");
+		active = false;
+{
+	
+}
 		
 	}
 
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return null;
+		return activeDescription;
 	}
 
 	public String getInactiveDescription() {
 		// TODO Auto-generated method stub
-		return null;
+		return inactiveDescription;
 	}
 
 	public String getSymbol() {
 		// TODO Auto-generated method stub
+		return "P";
+	}
+
+	public void setPosition(int row, int col)
+	{
+		if(row >= 0 && row< floor.length && col >= 0 && col < floor[row].length && floor[row][col] instanceof NPCRoom)
+		{
+			if(currentRoom != null)
+			{
+				currentRoom.leaveNPC();
+			}
+			currentRow = row;
+			currentCol = col;
+			currentRoom = (NPCRoom)floor[row][col];
+			currentRoom.enterNPC(this);
+		}
+		
+		
+	}
+
+	public void autoMove() {
+		if(active)
+		{
+			int[] move = calculateMove();
+			int newRow = currentRow + move[0];
+			int newCol = currentRow + move[1];
+			setPosition(newRow, newCol);
+		}
+		
+	}
+
+	private int[] calculateMove() {
+		int[][] possibleMoves = {{-1,0},{0,1},{1,0},{0,-1}};
+		int index = 
 		return null;
 	}
 	
