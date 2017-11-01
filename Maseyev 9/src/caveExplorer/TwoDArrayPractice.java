@@ -2,65 +2,60 @@ package caveExplorer;
 
 public class TwoDArrayPractice {
 
-
-
-
 	public static void main(String[] args) {
 		String[][] pic = new String[6][10];
-		for(int row = 0; row < pic.length; row++) {
-			for(int col = 0; col < pic[row].length; col++) {
-				pic[row][col] = " ";
+		for(String[] row: pic) {
+			for(int col = 0; col < row.length; col++ ) {
+				row[col] = "L";
 			}
 		}
-		//		drawHorizontalLine(pic,1);
-		//		drawHorizontalLine(pic,3);
-		//		drawHorizontalLine(pic,5);
-		//		drawVerticalLine(pic, 2);
-		drawBox(pic,0,0);
+//		drawHorizontalLine(pic, 2);
+//		drawVerticalLine(pic,3);
+//		drawSlot(pic, 4,6);
+//		drawBox(pic, 5,8);
 		print(pic);
+
 	}
 
-
 	/**
-	 * Box look slike this
-	 *      ___
-	 *      |*|
-	 *      |_|
-	 *      
-	 * but the * marks the coordinates of the box
-	 * CATCH: No ArrayIndexOutOfBoundsException
-	 * but draw any portion of the box that does fit on the "canvas"
+	 * A Box looks like this:
+	 * 	___
+	 *  |*|
+	 *  |_|
+	 * 
+	 * The '*' marks the coordinates of the box (it is not drawn)
+	 * Avoid an AIOOBE, but any portion of the Box
+	 * that fits on the canvas should be drawn
+	 * 
 	 * @param pic
 	 * @param i
 	 * @param j
 	 */
 	private static void drawBox(String[][] pic, int i, int j) {
 		drawSlot(pic, i, j);
-		drawSlot(pic, i+1,j);
-		drawIfInBounds("_",pic,i+1,j);
-		for(int col = j -1; col <= j+1; col++) {
-			drawIfInBounds("_", pic, i-1, col);
-		}
-
-	}
-
-
-	private static void drawIfInBounds(String string, String[][] pic, int i, int j) {
-		//SPECIAL NOTE: Always check row before column
-		//(IOW, check row exists before checking if a column exists in the row)
-		if(i>= 0 && i < pic.length && j >= 0 && j < pic[i].length) {
-			pic[i][j] = string;
+		drawSlot(pic, i+1, j);
+		drawAt("_",pic,i+1,j);
+		for(int col = j-1; col <= j+1; col++) {
+			drawAt("_",pic,i, col);
 		}
 	}
 
+	private static void drawAt(String string, String[][] pic, int row, int col) {
+		//always check the row before the column
+		//because the row must exist before a column can exist in it
+		if(row >= 0 && row < pic.length && col >= 0 && col < pic[row].length) {
+			pic[row][col] = string;
+		}
+	}
 
 	/**
 	 * A slot looks like this:
 	 *      | |
-	 * It is two vertical lines with a space between them
-	 * The coordinates, i,j are the coordinates of the space
-	 * In other words, a slot is a vertical line in front of i,j and after i,j
-	 * CATCH: No ArrayIndexOutOfBoundExceptions
+	 * The coordinates of the slot are where the space
+	 * between the two vertical lines is found. In other words,
+	 * there is a vertical line to the left of (i,j) and a vertical
+	 * line to the right of (i,j)
+	 * CATCH: No ArrayIndexOutOfBoundsExceptions
 	 * @param pic
 	 * @param i
 	 * @param j
@@ -70,50 +65,51 @@ public class TwoDArrayPractice {
 			if(j > 0) {
 				pic[i][j-1] = "|";
 			}
-			if(j < pic[i].length - 1) {
+			if(j < pic[i].length-1) {
 				pic[i][j+1] = "|";
 			}
+
 		}
 	}
-
-
 
 	private static void drawVerticalLine(String[][] pic, int col) {
-		for(int row = 0; row < pic.length; row ++) {
-			pic[row][col] = "|";
+		for(int i = 0; i < pic.length; i++) {
+			pic[i][col] = "|";
 		}
 	}
-
-
 
 	private static void drawHorizontalLine(String[][] pic, int row) {
-		for(int col = 0; col < pic[row].length; col++) {
-			pic[row][col] = "-";
+		for(int i = 0; i < pic[row].length; i++) {
+			pic[row][i] = "-";
 		}
 	}
 
-
-
 	/**
-	 * prints contents of pic, row by row
-	 * NO BRACKETS OR COMMAS
+	 * write a method that prints every string in the pic,
+	 * not separated by arrays and no brackets
 	 * @param pic
 	 */
 	private static void print(String[][] pic) {
-		String line="";
-		for(int row = 0; row < pic.length; row++) {
-			for(int col = 0; col < pic[row].length; col++) {
-				line += pic[row][col];
+		for(String[] row: pic) {
+			for(String col : row) {
+				System.out.print(col);
 			}
-			line+="\n";
+			System.out.println("");
 		}
-		System.out.println(line);
 	}
 
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
