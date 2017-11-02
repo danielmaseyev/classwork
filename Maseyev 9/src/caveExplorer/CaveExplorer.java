@@ -11,6 +11,7 @@ public class CaveExplorer {
 	public static boolean playing = true;
 	public static NPC[] npcs;
 	
+	
 	public static void main(String[] args) {
 		in = new Scanner(System.in);
 		CaveRoom.setUpCaves();//creates caves and starting room
@@ -33,10 +34,8 @@ public class CaveExplorer {
 		}
 	}
 
-	private static void moveNPCs()
-	{
-		for(NPC n: npcs)
-		{
+	private static void moveNPCs() {
+		for(NPC n: npcs) {
 			n.autoMove();
 		}
 		inventory.updateMap();
