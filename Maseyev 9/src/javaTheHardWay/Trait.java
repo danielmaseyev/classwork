@@ -1,7 +1,7 @@
 package javaTheHardWay;
 
 public class Trait {
-	public static final String[]traits = {
+	public static final String[] traits = {
 			"stripped","long-tailed","furry", "brown", "short-eared","spotted",
 			"short-tailed","hairless","white","long-eared"};
 	private String description;
@@ -11,7 +11,7 @@ public class Trait {
 	public static final void main(String[] args) {
 		Trait longTailed = new Trait(1);
 		Trait shortTailed = new Trait(6);
-		System.out.println(longTailed+" and "+shortTailed+"are the same trait: "+longTailed.equals(shortTailed));
+		System.out.println(longTailed+" and "+shortTailed+" are the same trait: "+longTailed.equals(shortTailed));
 
 	}
 	public Trait() {
@@ -23,7 +23,7 @@ public class Trait {
 		this.index = index;
 		description = traits[index];
 	}
-	public String toSrting()
+	public String toString()
 	{
 		return description;
 	}
