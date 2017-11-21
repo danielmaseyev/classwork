@@ -27,9 +27,9 @@ public class Predator extends ReproductionAnimal
 	}
 	public ReproductionAnimal getOffspring(ReproductionAnimal mate)
 	{
-		return new Predator(habitat, getDescription),
+		return new Predator(habitat, getDescription(),
 				Trait.getDominantTrait(getTrait1(), mate.getTrait2()),
-				Trait.getDominantTrait(getTrait2(), mate.getTrait2());
+				Trait.getDominantTrait(getTrait2(), mate.getTrait2()));
 	}
 	public boolean canEat()
 	{
